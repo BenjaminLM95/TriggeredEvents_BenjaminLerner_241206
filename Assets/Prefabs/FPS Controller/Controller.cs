@@ -40,7 +40,8 @@ public class Controller : MonoBehaviour
     float m_GroundedTimer;
     float m_SpeedAtJump = 0.0f;
 
-    
+    public GameObject flashlight;
+    private bool isOn; 
 
     void Awake()
     {
@@ -60,7 +61,8 @@ public class Controller : MonoBehaviour
         MainCamera.transform.localRotation = Quaternion.identity;
         m_CharacterController = GetComponent<CharacterController>();
 
-
+        isOn = true; 
+        flashlight.gameObject.SetActive(true); 
 
         m_VerticalAngle = 0.0f;
         m_HorizontalAngle = transform.localEulerAngles.y;
@@ -161,6 +163,20 @@ public class Controller : MonoBehaviour
             if (!wasGrounded && m_Grounded)
             {
                 //play a sound after being in air and landing
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            if(isOn == true) 
+            {
+                flashlight.gameObject.SetActive(false);
+                isOn = false;
+            }
+            else 
+            {
+                flashlight.gameObject.SetActive(true);
+                isOn = true; 
             }
         }
 
