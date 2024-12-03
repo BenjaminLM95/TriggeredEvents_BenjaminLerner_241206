@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -41,7 +43,11 @@ public class Controller : MonoBehaviour
     float m_SpeedAtJump = 0.0f;
 
     public GameObject flashlight;
-    private bool isOn; 
+    private bool isOn;
+
+    public int nSouls;
+    public int mxSouls; 
+    public TextMeshProUGUI SoulCount;
 
     void Awake()
     {
@@ -62,10 +68,13 @@ public class Controller : MonoBehaviour
         m_CharacterController = GetComponent<CharacterController>();
 
         isOn = true; 
-        flashlight.gameObject.SetActive(true); 
+        flashlight.gameObject.SetActive(false); 
 
         m_VerticalAngle = 0.0f;
         m_HorizontalAngle = transform.localEulerAngles.y;
+
+        nSouls = 0;
+        SoulCount.text = "Souls: " + nSouls;
     }
 
     void Update()
@@ -178,7 +187,22 @@ public class Controller : MonoBehaviour
                 flashlight.gameObject.SetActive(true);
                 isOn = true; 
             }
-        }
+        }        
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("SoulSpirit")) 
+        {
+            other.gameObject.SetActive(false);
+            nSouls++;
+            UpdateText(); 
+        }
+    }
+
+    private void UpdateText() 
+    {        
+        SoulCount.text = "Souls: " + nSouls; 
     }
 }
