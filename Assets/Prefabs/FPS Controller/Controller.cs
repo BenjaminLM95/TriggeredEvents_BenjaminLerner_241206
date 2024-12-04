@@ -48,6 +48,7 @@ public class Controller : MonoBehaviour
     public int nSouls;
     public int mxSouls; 
     public TextMeshProUGUI SoulCount;
+    public TextMeshProUGUI WinText; 
 
     void Awake()
     {
@@ -74,7 +75,7 @@ public class Controller : MonoBehaviour
         m_HorizontalAngle = transform.localEulerAngles.y;
 
         nSouls = 0;
-        SoulCount.text = "Souls: " + nSouls;
+        SoulCount.text = "Souls: " + nSouls + " / " + mxSouls;
     }
 
     void Update()
@@ -189,6 +190,11 @@ public class Controller : MonoBehaviour
             }
         }        
 
+        if(nSouls >= mxSouls) 
+        {
+            WinText.gameObject.SetActive(true);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -203,6 +209,6 @@ public class Controller : MonoBehaviour
 
     private void UpdateText() 
     {        
-        SoulCount.text = "Souls: " + nSouls; 
+        SoulCount.text = "Souls: " + nSouls + " / " + mxSouls;
     }
 }
