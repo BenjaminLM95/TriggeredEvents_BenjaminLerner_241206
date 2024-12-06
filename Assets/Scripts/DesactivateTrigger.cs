@@ -16,7 +16,7 @@ public class DesactivateTrigger : MonoBehaviour
     private void Start()
     {
         controller = player.GetComponent<Controller>(); 
-        activated = false; 
+        //activated = false; 
 
     }
     private void OnTriggerEnter(Collider other)
@@ -24,10 +24,10 @@ public class DesactivateTrigger : MonoBehaviour
 
         if(controller.nSouls >= controller.mxSouls - 2) 
         {
-            if (other.gameObject.CompareTag("Player") && !activated) 
+            if (other.gameObject.CompareTag("Player")) 
             {            
             _objectToDesappear.gameObject.SetActive(false);
-            activated = true;
+            //activated = true;
                 msg.gameObject.SetActive(true);
                 msg.text = "Something happened! Go outside and look around!";
             }

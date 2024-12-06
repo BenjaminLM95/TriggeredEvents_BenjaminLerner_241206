@@ -5,15 +5,13 @@ using UnityEngine;
 public class AppearTrigger : MonoBehaviour
 {
     public GameObject _gameObject;
-    private bool happened = false; 
+  
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
-        if (!happened)
-        {
-            _gameObject.gameObject.SetActive(true);
-            happened = true; 
-        }
+       
+        _gameObject.gameObject.SetActive(true);            
+        
     }
 
     private void OnTriggerExit(Collider other)
